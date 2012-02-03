@@ -1,7 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.simiancage.deathtpplus</groupId>
-  <artifactId>DeathTpPlus</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <repositories>
     <repository>
@@ -67,16 +66,8 @@
   <description>DeathNotify + DeathTP + Streaks + DeathLog</description>
   <ciManagement>
   	<system>jenkins</system>
-  	<url>http://ci.milkbowl.net/job/DeathTpPlus/</url>
+  	<url>http://ci.milkbowl.net/job/HeroicDeath2/</url>
   </ciManagement>
-  <scm>
-  	<url>https://github.com/mung3r/DeathTpPlus</url>
-  	<connection>scm:git:git://github.com:mung3r/DeathTpPlus.git</connection>
-  	<developerConnection>scm:git:git://github.com:mung3r/DeathTpPlus.git</developerConnection>
-  </scm>
-  <issueManagement>
-  	<system>github</system>
-  	<url>https://github.com/mung3r/MobRider/issues</url>
-  </issueManagement>
-  <url>https://github.com/mung3r/DeathTpPlus</url>
+  <url>https://github.com/Herocraft/DeathTpPlus</url>
+  <artifactId>HeroicDeath2</artifactId>
 </project>
