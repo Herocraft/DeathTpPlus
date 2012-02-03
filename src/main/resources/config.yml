@@ -331,7 +331,7 @@ multikill:
 - '10:&cHoly S**t!'
 
 sounds:
-    url: 'http://www.github.com/sleaker/DeathTpPlus/tree/master/resources/sounds/'
+    url: 'https://raw.github.com/mung3r/DeathTpPlus/master/resources/sounds/'
     format: '.ogg'
     killstreaks: 
     - '5:killingspree'
