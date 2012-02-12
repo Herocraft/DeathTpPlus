@@ -297,6 +297,13 @@ enderdragon:
 dispenser:
 - '&5%n&7 fell victim to a trap!'
 
+poison:
+- '&5%n&7 dropped too much acid!'
+- '&5%n&7 died from food poisoning!'
+
+magic:
+- '&5%n&7 fell victim to a curse!'
+
 # ----- Streaks
 
 # format <#of kills> <text to display> %n = player getting the message (in this case, the one on a killstreak).
