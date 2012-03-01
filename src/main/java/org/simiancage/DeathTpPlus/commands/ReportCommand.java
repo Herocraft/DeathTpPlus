@@ -49,30 +49,32 @@ public class ReportCommand extends BasicCommand
                 sender.sendMessage("No records found.");
             }
             else {
-                Collections.sort(records, new Comparator<DeathRecord>() {
-                    public int compare(DeathRecord record1, DeathRecord record2) {
+                Collections.sort(records, new Comparator<DeathRecord>()
+                {
+                    public int compare(DeathRecord record1, DeathRecord record2)
+                    {
                         return record1.getEventName().compareToIgnoreCase(record2.getEventName());
                     }
                 });
-            }
 
-            int numPages = records.size() / CMDS_PER_PAGE;
-            if (records.size() % CMDS_PER_PAGE != 0) {
-                numPages++;
-            }
-            if (page >= numPages || page < 0) {
-                page = 0;
-            }
+                int numPages = records.size() / CMDS_PER_PAGE;
+                if (records.size() % CMDS_PER_PAGE != 0) {
+                    numPages++;
+                }
+                if (page >= numPages || page < 0) {
+                    page = 0;
+                }
 
-            sender.sendMessage("§c-----[ " + "§fDeathTpPlus Report <" + (page + 1) + "/" + numPages + ">§c ]-----");
-            int start = page * CMDS_PER_PAGE;
-            int end = start + CMDS_PER_PAGE;
-            if (end > records.size()) {
-                end = records.size();
-            }
-            for (int c = start; c < end; c++) {
-                DeathRecord record = records.get(c);
-                sender.sendMessage(String.format("%s: %s", record.getEventName(), record.getCount()));
+                sender.sendMessage("§c-----[ " + "§fDeathTpPlus Report <" + (page + 1) + "/" + numPages + ">§c ]-----");
+                int start = page * CMDS_PER_PAGE;
+                int end = start + CMDS_PER_PAGE;
+                if (end > records.size()) {
+                    end = records.size();
+                }
+                for (int c = start; c < end; c++) {
+                    DeathRecord record = records.get(c);
+                    sender.sendMessage(String.format("%s: %s", record.getEventName(), record.getCount()));
+                }
             }
         }
         else {

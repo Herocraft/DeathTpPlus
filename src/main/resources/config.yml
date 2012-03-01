@@ -297,6 +297,13 @@ enderdragon:
 dispenser:
 - '&5%n&7 fell victim to a trap!'
 
+poison:
+- '&5%n&7 dropped too much acid!'
+- '&5%n&7 died from food poisoning!'
+
+magic:
+- '&5%n&7 fell victim to a curse!'
+
 # ----- Streaks
 
 # format <#of kills> <text to display> %n = player getting the message (in this case, the one on a killstreak).
@@ -331,7 +338,7 @@ multikill:
 - '10:&cHoly S**t!'
 
 sounds:
-    url: 'http://www.github.com/sleaker/DeathTpPlus/tree/master/resources/sounds/'
+    url: 'https://raw.github.com/mung3r/DeathTpPlus/master/resources/sounds/'
     format: '.ogg'
     killstreaks: 
     - '5:killingspree'

@@ -4,7 +4,7 @@ version: 1.95-b${BUILD_NUMBER}
 website: https://github.com/dredhorse/DeathTpPlus
 authors: [Don Redhorse, orig. by. lonelydime]
 description: Death commands including deathtp, deathnotify and deathstreaks.
-softdepend: [Vault,CraftIRC]
+softdepend: [Vault,CraftIRC,Spout]
 
 commands:
     dtp:
