@@ -9,7 +9,7 @@
     </repository>
     <repository>
       <id>spout-repo</id>
-      <url>http://repo.spout.org</url>
+      <url>http://http://nexus.getspout.org/content/groups/public/</url>
     </repository>
     <repository>
       <id>vault-repo</id>

@@ -12,7 +12,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.MagmaCube;
-import org.bukkit.entity.Monster;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.PigZombie;
@@ -88,9 +87,6 @@ public class DTPUtils
         if (entity instanceof Wolf)
             return CreatureType.WOLF;
 
-        // Monster is a parent class and needs to be last
-        if (entity instanceof Monster)
-            return CreatureType.MONSTER;
         return null;
     }
 }

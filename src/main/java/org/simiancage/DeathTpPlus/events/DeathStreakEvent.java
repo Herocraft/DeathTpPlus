@@ -15,8 +15,6 @@ public class DeathStreakEvent extends Event
 
     public DeathStreakEvent(Player player, Player killer, String message, Integer deaths)
     {
-        super("DeathStreakEvent");
-
         this.player = player;
         this.killer = killer;
         this.message = message;
