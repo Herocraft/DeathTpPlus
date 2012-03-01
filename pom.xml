@@ -62,7 +62,7 @@
   <properties>
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  <name>DeathTpPlus</name>
+  <name>HeroicDeath2</name>
   <description>DeathNotify + DeathTP + Streaks + DeathLog</description>
   <ciManagement>
   	<system>jenkins</system>
@@ -70,4 +70,8 @@
   </ciManagement>
   <url>https://github.com/Herocraft/DeathTpPlus</url>
   <artifactId>HeroicDeath2</artifactId>
+  <issueManagement>
+  	<system>GitHub</system>
+  	<url>https://github.com/HeroCraft/DeathTpPlus/issues</url>
+  </issueManagement>
 </project>
