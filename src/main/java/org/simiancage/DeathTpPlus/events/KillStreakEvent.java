@@ -4,7 +4,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-@SuppressWarnings("serial")
 public class KillStreakEvent extends Event
 {
     private static final HandlerList handlers = new HandlerList();
@@ -16,8 +15,6 @@ public class KillStreakEvent extends Event
 
     public KillStreakEvent(Player player, Player victim, String message, Integer kills, Boolean isMultiKill)
     {
-        super("KillStreakEvent");
-
         this.player = player;
         this.message = message;
         this.kills = kills;

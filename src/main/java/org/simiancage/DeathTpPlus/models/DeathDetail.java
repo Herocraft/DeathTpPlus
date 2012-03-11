@@ -11,7 +11,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.simiancage.DeathTpPlus.DeathTpPlus;
-import org.simiancage.DeathTpPlus.utils.DTPUtils;
 import org.simiancage.DeathTpPlus.utils.DTPConfig.DeathEventType;
 
 public class DeathDetail
@@ -47,13 +46,13 @@ public class DeathDetail
                 if (damager instanceof Tameable) {
                     if (((Tameable) damager).isTamed()) {
                         causeOfDeath = DeathEventType.PVP_TAMED;
-                        murderWeapon = DTPUtils.getCreatureType(damager).toString();
+                        murderWeapon = damager.getType().toString();
                         killer = (Player) ((Tameable) damager).getOwner();
                     }
                 }
                 else {
                     try {
-                        causeOfDeath = DeathEventType.valueOf(DTPUtils.getCreatureType(damager).toString());
+                        causeOfDeath = DeathEventType.valueOf(damager.getType().toString());
                     }
                     catch (IllegalArgumentException e) {
                         causeOfDeath = DeathEventType.UNKNOWN;
@@ -68,7 +67,7 @@ public class DeathDetail
                 }
                 else if (((Projectile) damager).getShooter() instanceof Creature) {
                     try {
-                        causeOfDeath = DeathEventType.valueOf(DTPUtils.getCreatureType(((Projectile) damager).getShooter()).toString());
+                        causeOfDeath = DeathEventType.valueOf( ((Projectile) damager).getShooter().getType().toString());
                     }
                     catch (IllegalArgumentException e) {
                         causeOfDeath = DeathEventType.UNKNOWN;
