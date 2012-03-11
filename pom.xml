@@ -9,7 +9,7 @@
     </repository>
     <repository>
       <id>spout-repo</id>
-      <url>http://repo.spout.org</url>
+      <url>http://http://nexus.getspout.org/content/groups/public/</url>
     </repository>
     <repository>
       <id>vault-repo</id>
@@ -37,7 +37,7 @@
     <dependency>
         <groupId>net.milkbowl.vault</groupId>
         <artifactId>Vault</artifactId>
-        <version>1.2.8-SNAPSHOT</version>
+        <version>1.2.12-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <build>
@@ -62,7 +62,7 @@
   <properties>
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  <name>DeathTpPlus</name>
+  <name>HeroicDeath2</name>
   <description>DeathNotify + DeathTP + Streaks + DeathLog</description>
   <ciManagement>
   	<system>jenkins</system>
@@ -70,4 +70,8 @@
   </ciManagement>
   <url>https://github.com/Herocraft/DeathTpPlus</url>
   <artifactId>HeroicDeath2</artifactId>
+  <issueManagement>
+  	<system>GitHub</system>
+  	<url>https://github.com/HeroCraft/DeathTpPlus/issues</url>
+  </issueManagement>
 </project>
