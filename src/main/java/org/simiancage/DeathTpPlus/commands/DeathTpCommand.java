@@ -76,12 +76,12 @@ public class DeathTpCommand extends BasicCommand
 
     private Boolean canTp(Player player)
     {
-        return hasItem(player) && hasFunds(player);
+        return (!isItemRequired() || hasItem(player)) && hasFunds(player);
     }
 
     private void registerTp(Player player)
     {
-        if (hasItem(player)) {
+        if (isItemRequired() && hasItem(player)) {
             ItemStack itemInHand = player.getItemInHand();
 
             if (itemInHand.getAmount() == 1) {
@@ -105,13 +105,18 @@ public class DeathTpCommand extends BasicCommand
         int chargeItem = Integer.parseInt(DTPConfig.configValues.get(ConfigValueType.CHARGE_ITEM));
 
         // costs item in inventory
-        if (chargeItem == 0 || chargeItem == player.getItemInHand().getType().getId()) {
+        if (chargeItem == player.getItemInHand().getType().getId()) {
             return true;
         }
 
         player.sendMessage(String.format("You must be holding a(n) %s to use this command!", Material.getMaterial(chargeItem).toString().toLowerCase()));
 
         return false;
+    }
+
+    private Boolean isItemRequired()
+    {
+    	return Integer.parseInt(DTPConfig.configValues.get(ConfigValueType.CHARGE_ITEM)) != 0;
     }
 
     private Boolean hasFunds(Player player)
