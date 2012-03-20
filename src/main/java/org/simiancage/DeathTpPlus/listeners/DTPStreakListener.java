@@ -1,6 +1,7 @@
 package org.simiancage.DeathTpPlus.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -13,6 +14,7 @@ import org.simiancage.DeathTpPlus.utils.DTPConfig;
 public class DTPStreakListener implements Listener {
 
     private final DeathTpPlus plugin;
+    private static final int SOUND_DISTANCE = 50;
 
     public DTPStreakListener(DeathTpPlus plugin) {
         this.plugin = plugin;
@@ -26,21 +28,22 @@ public class DTPStreakListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onKillStreakEvent(KillStreakEvent event) {
         Bukkit.broadcastMessage(event.getMessage().replace("%n", event.getPlayer().getName()));
+        final Location location = event.getVictim().getLocation();
         if (DTPConfig.configFlags.get(DTPConfig.ConfigFlagType.PLAY_SOUNDS) && DeathTpPlus.spout != null) {
             if (event.isMultiKill()) {
                 // Play our multikill sound
                 playMultiKillSound(event);
-
+                
                 // Schedule the killstreak message for slightly after in case the player has a kill-streak;
                 final Integer kills = DeathTpPlus.streakLog.getRecord(event.getPlayer().getName()).getCount();
                 Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                     @Override
                     public void run() {
-                        playKillStreakSound(kills);
+                        playKillStreakSound(kills, location);
                     }
                 }, 40);
             } else {
-                playKillStreakSound(event.getKills());
+                playKillStreakSound(event.getKills(), location);
             }
         }
     }
@@ -51,15 +54,15 @@ public class DTPStreakListener implements Listener {
             return;
         }
         String url = DTPConfig.getSoundUrl() + soundName + DTPConfig.getSoundFormat();
-        SpoutManager.getSoundManager().playGlobalCustomSoundEffect(plugin, url, false);
+        SpoutManager.getSoundManager().playGlobalCustomSoundEffect(plugin, url, false, event.getVictim().getLocation(), SOUND_DISTANCE);
     }
 
-    private void playKillStreakSound(Integer kills) {
+    private void playKillStreakSound(Integer kills, Location loc) {
         String soundName = DTPConfig.getKillStreakSound(kills);
         if (soundName == null) {
             return;
         }
         String url = DTPConfig.getSoundUrl() + soundName + DTPConfig.getSoundFormat();
-        SpoutManager.getSoundManager().playGlobalCustomSoundEffect(plugin, url, false);
+        SpoutManager.getSoundManager().playGlobalCustomSoundEffect(plugin, url, false, loc, SOUND_DISTANCE);
     }
 }
