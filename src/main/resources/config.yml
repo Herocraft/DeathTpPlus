@@ -304,6 +304,9 @@ poison:
 magic:
 - '&5%n&7 fell victim to a curse!'
 
+iron-golem:
+- '&5%n&7 messed with the wrong giant!'
+
 # ----- Streaks
 
 # format <#of kills> <text to display> %n = player getting the message (in this case, the one on a killstreak).
