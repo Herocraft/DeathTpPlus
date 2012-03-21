@@ -28,7 +28,7 @@ public class DTPStreakListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onKillStreakEvent(KillStreakEvent event) {
         Bukkit.broadcastMessage(event.getMessage().replace("%n", event.getPlayer().getName()));
-        final Location location = event.getVictim().getLocation();
+        final Location location = event.getPlayer().getLocation();
         if (DTPConfig.configFlags.get(DTPConfig.ConfigFlagType.PLAY_SOUNDS) && DeathTpPlus.spout != null) {
             if (event.isMultiKill()) {
                 // Play our multikill sound
@@ -54,7 +54,7 @@ public class DTPStreakListener implements Listener {
             return;
         }
         String url = DTPConfig.getSoundUrl() + soundName + DTPConfig.getSoundFormat();
-        SpoutManager.getSoundManager().playGlobalCustomSoundEffect(plugin, url, false, event.getVictim().getLocation(), SOUND_DISTANCE);
+        SpoutManager.getSoundManager().playGlobalCustomSoundEffect(plugin, url, false, event.getPlayer().getLocation(), SOUND_DISTANCE);
     }
 
     private void playKillStreakSound(Integer kills, Location loc) {
