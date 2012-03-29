@@ -26,24 +26,20 @@ public class DTPStreakListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onKillStreakEvent(KillStreakEvent event) {
+    public void onKillStreakEvent(final KillStreakEvent event) {
         Bukkit.broadcastMessage(event.getMessage().replace("%n", event.getPlayer().getName()));
         final Location location = event.getPlayer().getLocation();
         if (DTPConfig.configFlags.get(DTPConfig.ConfigFlagType.PLAY_SOUNDS) && DeathTpPlus.spout != null) {
             if (event.isMultiKill()) {
                 // Play our multikill sound
                 playMultiKillSound(event);
-                
-                // Schedule the killstreak message for slightly after in case the player has a kill-streak;
-                final Integer kills = DeathTpPlus.streakLog.getRecord(event.getPlayer().getName()).getCount();
+            } else {
                 Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                     @Override
                     public void run() {
-                        playKillStreakSound(kills, location);
+                        playKillStreakSound(event.getKills(), location);
                     }
                 }, 40);
-            } else {
-                playKillStreakSound(event.getKills(), location);
             }
         }
     }
