@@ -3,27 +3,22 @@ package org.simiancage.DeathTpPlus.models;
 import java.util.Calendar;
 import java.util.Date;
 
-public class StreakRecord
-{
+public class StreakRecord {
     private String playerName;
     private Integer count;
     private Date multiKillStart;
     private Integer multiKillCount;
 
-    public StreakRecord()
-    {
-    }
+    public StreakRecord() { }
 
-    public StreakRecord(String playerName, int count, Date timeStamp, int multiKillCount)
-    {
+    public StreakRecord(String playerName, int count, Date timeStamp, int multiKillCount) {
         this.playerName = playerName;
         this.count = count;
         this.multiKillStart = timeStamp;
         this.multiKillCount = multiKillCount;
     }
 
-    public StreakRecord(String record)
-    {
+    public StreakRecord(String record) {
         if (record != null) {
             String[] parts = record.split(":");
 
@@ -42,48 +37,39 @@ public class StreakRecord
         }
     }
 
-    public String getPlayerName()
-    {
+    public String getPlayerName() {
         return playerName;
     }
 
-    public void setPlayerName(String playerName)
-    {
+    public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
 
-    public Integer getCount()
-    {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(int count)
-    {
+    public void setCount(int count) {
         this.count = count;
     }
 
-    public Date getMultiKillStart()
-    {
+    public Date getMultiKillStart() {
         return multiKillStart;
     }
 
-    public void setMultiKillStart(Date multiKillStart)
-    {
+    public void setMultiKillStart(Date multiKillStart) {
         this.multiKillStart = multiKillStart;
     }
 
-    public Integer getMultiKillCount()
-    {
+    public Integer getMultiKillCount() {
         return multiKillCount;
     }
 
-    public void setMultiKillCount(int multiKillCount)
-    {
+    public void setMultiKillCount(int multiKillCount) {
         this.multiKillCount = multiKillCount;
     }
 
-    private Long getElapsedTime()
-    {
+    private Long getElapsedTime() {
         Long elapsedTime = Calendar.getInstance().getTimeInMillis();
 
         if (multiKillStart != null) {
@@ -92,13 +78,11 @@ public class StreakRecord
         return elapsedTime;
     }
 
-    public Boolean isWithinMutiKillTimeWindow(long multiKillTimeWindow)
-    {
+    public Boolean isWithinMutiKillTimeWindow(long multiKillTimeWindow) {
         return multiKillTimeWindow > getElapsedTime();
     }
 
-    public void updateMultiKillCount(long multiKillTimeWindow)
-    {
+    public void updateMultiKillCount(long multiKillTimeWindow) {
         if (isWithinMutiKillTimeWindow(multiKillTimeWindow)) {
             multiKillCount++;
         }
@@ -109,8 +93,7 @@ public class StreakRecord
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return String.format("%s:%d:%tQ:%d", playerName, count, multiKillStart, multiKillCount);
     }
 }

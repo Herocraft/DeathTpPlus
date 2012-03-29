@@ -4,80 +4,66 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class KillStreakEvent extends Event
-{
+public class KillStreakEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
     private Player player;
     private Player victim;
     private String message;
-    private Integer kills;
-    private Boolean isMultiKill;
+    private int kills;
+    private boolean isMultiKill;
 
-    public KillStreakEvent(Player player, Player victim, String message, Integer kills, Boolean isMultiKill)
-    {
+    public KillStreakEvent(Player player, Player victim, String message, int kills, boolean isMultiKill) {
         this.player = player;
         this.message = message;
         this.kills = kills;
         this.isMultiKill = isMultiKill;
     }
 
-    public Player getPlayer()
-    {
+    public Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player)
-    {
+    public void setPlayer(Player player) {
         this.player = player;
     }
 
-    public Player getVictim()
-    {
+    public Player getVictim() {
         return victim;
     }
 
-    public void setVictim(Player victim)
-    {
+    public void setVictim(Player victim) {
         this.victim = victim;
     }
 
-    public String getMessage()
-    {
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message)
-    {
+    public void setMessage(String message) {
         this.message = message;
     }
 
-    public Integer getKills()
-    {
+    public Integer getKills() {
         return kills;
     }
 
-    public void setKills(Integer kills)
-    {
+    public void setKills(Integer kills) {
         this.kills = kills;
     }
 
-    public Boolean isMultiKill()
-    {
+    public Boolean isMultiKill() {
         return isMultiKill;
     }
 
-    public void isMultiKill(Boolean isMultiKill)
-    {
+    public void isMultiKill(Boolean isMultiKill) {
         this.isMultiKill = isMultiKill;
     }
 
-    public HandlerList getHandlers()
-    {
+    public HandlerList getHandlers() {
         return handlers;
     }
 
-    public static HandlerList getHandlerList()
-    {
+    public static HandlerList getHandlerList() {
         return handlers;
     }
 
