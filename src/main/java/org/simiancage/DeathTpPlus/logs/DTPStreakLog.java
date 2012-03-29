@@ -128,16 +128,15 @@ public class DTPStreakLog
             if (deathStreakMessage != null) {
                 Bukkit.getPluginManager().callEvent(new DeathStreakEvent(deathDetail.getPlayer(), deathDetail.getKiller(), deathStreakMessage, deathStreakRecord.getCount()));
             }
-            // Kills
+            // Multi Kills
             String multiKillMessage = DTPConfig.getMultiKillMessage(killStreakRecord.getMultiKillCount());
             if (multiKillMessage != null && killStreakRecord.isWithinMutiKillTimeWindow(Long.valueOf(DTPConfig.configValues.get(ConfigValueType.MULTIKILL_TIMEWINDOW)))) {
                 Bukkit.getPluginManager().callEvent(new KillStreakEvent(deathDetail.getKiller(), deathDetail.getPlayer(), multiKillMessage, killStreakRecord.getMultiKillCount(), true));
             }
-            else {
-                String killStreakMessage = DTPConfig.getKillStreakMessage(killStreakRecord.getCount());
-                if (killStreakMessage != null) {
-                    Bukkit.getPluginManager().callEvent(new KillStreakEvent(deathDetail.getKiller(), deathDetail.getPlayer(), killStreakMessage, killStreakRecord.getCount(), false));
-                }
+            // Kill Streak
+            String killStreakMessage = DTPConfig.getKillStreakMessage(killStreakRecord.getCount());
+            if (killStreakMessage != null) {
+                Bukkit.getPluginManager().callEvent(new KillStreakEvent(deathDetail.getKiller(), deathDetail.getPlayer(), killStreakMessage, killStreakRecord.getCount(), false));
             }
         }
 
