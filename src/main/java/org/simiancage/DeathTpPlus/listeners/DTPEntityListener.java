@@ -24,7 +24,7 @@ public class DTPEntityListener implements Listener {
             return;
         }
 
-        DeathDetail deathDetail = new DeathDetail(event);
+        DeathDetail deathDetail = DeathDetail.getDeathDetailFromDeathEvent(event);
 
         if (DTPConfig.configFlags.get(ConfigFlagType.ALLOW_DEATHTP)) {
             DeathTpPlus.deathLocationLog.setRecord(deathDetail);

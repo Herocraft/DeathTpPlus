@@ -47,7 +47,7 @@ public class DeathTpCommand extends BasicCommand
 
         DeathLocationRecord locationRecord = DeathTpPlus.deathLocationLog.getRecord(player.getName());
 
-        if (locationRecord != null) {
+        if (locationRecord != null && locationRecord.getWorld() != null) {
 
             World deathWorld = player.getServer().getWorld(locationRecord.getWorldName());
             Location deathLocation = deathWorld.getHighestBlockAt(locationRecord.getLocation().getBlockX(), locationRecord.getLocation().getBlockZ()).getLocation();
@@ -116,7 +116,7 @@ public class DeathTpCommand extends BasicCommand
 
     private Boolean isItemRequired()
     {
-    	return Integer.parseInt(DTPConfig.configValues.get(ConfigValueType.CHARGE_ITEM)) != 0;
+        return Integer.parseInt(DTPConfig.configValues.get(ConfigValueType.CHARGE_ITEM)) != 0;
     }
 
     private Boolean hasFunds(Player player)

@@ -24,9 +24,10 @@ public class DeathDetail
     {
     }
 
-    public DeathDetail(EntityDeathEvent event)
-    {
-        player = (Player) event.getEntity();
+    public static DeathDetail getDeathDetailFromDeathEvent(EntityDeathEvent event) {
+    	DeathDetail deathDetail = new DeathDetail();
+    	
+    	deathDetail.setPlayer((Player) event.getEntity());
 
         EntityDamageEvent damageEvent = event.getEntity().getLastDamageCause();
 
@@ -34,64 +35,66 @@ public class DeathDetail
             Entity damager = ((EntityDamageByEntityEvent) damageEvent).getDamager();
             if (damager instanceof Player) {
                 if (((Player) damager).getItemInHand().getType().equals(Material.AIR)) {
-                    causeOfDeath = DeathEventType.PVP_FISTS;
+                    deathDetail.setCauseOfDeath(DeathEventType.PVP_FISTS);
                 }
                 else {
-                    causeOfDeath = DeathEventType.PVP;
+                	deathDetail.setCauseOfDeath(DeathEventType.PVP);
                 }
-                murderWeapon = ((Player) damager).getItemInHand().getType().toString();
-                killer = (Player) damager;
+                deathDetail.setMurderWeapon(((Player) damager).getItemInHand().getType().toString());
+                deathDetail.setKiller((Player) damager);
             }
             else if (damager instanceof Creature) {
                 if (damager instanceof Tameable) {
                     if (((Tameable) damager).isTamed()) {
-                        causeOfDeath = DeathEventType.PVP_TAMED;
-                        murderWeapon = damager.getType().toString();
-                        killer = (Player) ((Tameable) damager).getOwner();
+                    	deathDetail.setCauseOfDeath(DeathEventType.PVP_TAMED);
+                    	deathDetail.setMurderWeapon(damager.getType().toString());
+                        deathDetail.setKiller((Player) ((Tameable) damager).getOwner());
                     }
                 }
                 else {
                     try {
-                        causeOfDeath = DeathEventType.valueOf(damager.getType().toString());
+                    	deathDetail.setCauseOfDeath(DeathEventType.valueOf(damager.getType().toString()));
                     }
                     catch (IllegalArgumentException e) {
-                        causeOfDeath = DeathEventType.UNKNOWN;
+                    	deathDetail.setCauseOfDeath(DeathEventType.UNKNOWN);
                     }
                 }
             }
             else if (damager instanceof Projectile) {
                 if (((Projectile) damager).getShooter() instanceof Player) {
-                    causeOfDeath = DeathEventType.PVP;
-                    murderWeapon = ((Projectile) damager).toString().replace("Craft", "");
-                    killer = (Player) ((Projectile) damager).getShooter();
+                	deathDetail.setCauseOfDeath(DeathEventType.PVP);
+                	deathDetail.setMurderWeapon(((Projectile) damager).toString().replace("Craft", ""));
+                    deathDetail.setKiller((Player) ((Projectile) damager).getShooter());
                 }
                 else if (((Projectile) damager).getShooter() instanceof Creature) {
                     try {
-                        causeOfDeath = DeathEventType.valueOf( ((Projectile) damager).getShooter().getType().toString());
+                    	deathDetail.setCauseOfDeath((DeathEventType.valueOf( ((Projectile) damager).getShooter().getType().toString())));
                     }
                     catch (IllegalArgumentException e) {
-                        causeOfDeath = DeathEventType.UNKNOWN;
+                    	deathDetail.setCauseOfDeath(DeathEventType.UNKNOWN);
                     }
                 }
                 else {
-                    causeOfDeath = DeathEventType.DISPENSER;
+                	deathDetail.setCauseOfDeath(DeathEventType.DISPENSER);
                 }
             }
             else if (damager instanceof TNTPrimed) {
-                causeOfDeath = DeathEventType.BLOCK_EXPLOSION;
+            	deathDetail.setCauseOfDeath(DeathEventType.BLOCK_EXPLOSION);
             }
             else {
                 DeathTpPlus.logger.info("Unknown enitity damager" + damager);
             }
         }
         else if (damageEvent != null) {
-            causeOfDeath = DeathEventType.valueOf(damageEvent.getCause().toString());
+        	deathDetail.setCauseOfDeath(DeathEventType.valueOf(damageEvent.getCause().toString()));
         }
 
-        if (causeOfDeath == null) {
-            causeOfDeath = DeathEventType.UNKNOWN;
-            murderWeapon = "unknown";
+        if (deathDetail.getCauseOfDeath() == null) {
+        	deathDetail.setCauseOfDeath(DeathEventType.UNKNOWN);
+            deathDetail.setMurderWeapon("unknown");
         }
+        
+    	return deathDetail;
     }
 
     public Player getPlayer()
@@ -136,7 +139,7 @@ public class DeathDetail
 
     public Boolean isPVPDeath()
     {
-        return causeOfDeath== DeathEventType.PVP || causeOfDeath == DeathEventType.PVP_FISTS || causeOfDeath == DeathEventType.PVP_TAMED;
+        return causeOfDeath == DeathEventType.PVP || causeOfDeath == DeathEventType.PVP_FISTS || causeOfDeath == DeathEventType.PVP_TAMED;
     }
 
     private static String toCamelCase(String rawItemName)

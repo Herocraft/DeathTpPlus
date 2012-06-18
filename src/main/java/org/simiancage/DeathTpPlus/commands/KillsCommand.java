@@ -28,8 +28,8 @@ public class KillsCommand extends BasicCommand
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
                     total = DeathTpPlus.deathLog.getTotalByType(player.getName(), DeathRecordType.kill);
-                    if (total > -1) {
-                        sender.sendMessage(String.format("You have %d kill(s)", total));
+                    if (total >= 0) {
+                        sender.sendMessage(String.format("You have %d PVP kill(s)", total));
                     }
                     else {
                         sender.sendMessage("No record found.");
@@ -41,8 +41,8 @@ public class KillsCommand extends BasicCommand
                 break;
             case 1:
                 total = DeathTpPlus.deathLog.getTotalByType(args[0], DeathRecordType.kill);
-                if (total > -1) {
-                    sender.sendMessage(String.format("%s has %d kill(s)", args[0], total));
+                if (total >= 0) {
+                    sender.sendMessage(String.format("%s has %d PVP kill(s)", args[0], total));
                 }
                 else {
                     sender.sendMessage("No record found.");

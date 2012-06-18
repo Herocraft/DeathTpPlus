@@ -30,7 +30,7 @@ public class CommandHandler {
     }
 
     public void removeCommand(Command command) {
-        commands.remove(command);
+        commands.remove(command.getName().toLowerCase());
     }
 
     public Command getCommand(String name) {

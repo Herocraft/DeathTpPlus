@@ -53,6 +53,26 @@ public class StreakRecord {
         this.count = count;
     }
 
+    public void incrementKillCount()
+    {
+        if (count < 0) {
+            count = 1;
+        }
+        else {
+            count++;
+        }
+    }
+
+    public void incrementDeathCount()
+    {
+        if (count > 0) {
+            count = -1;
+        }
+        else {
+            count--;
+        }
+    }
+
     public Date getMultiKillStart() {
         return multiKillStart;
     }

@@ -6,9 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Hashtable;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.simiancage.DeathTpPlus.DeathTpPlus;
@@ -20,14 +20,18 @@ import org.simiancage.DeathTpPlus.utils.DTPConfig;
 import org.simiancage.DeathTpPlus.utils.DTPConfig.ConfigValueType;
 import org.simiancage.DeathTpPlus.utils.DTPConfig.DeathEventType;
 
-public class DTPStreakLog
+public class DTPStreakLog implements Runnable
 {
     private static final String STREAK_LOG_FILE = "streak.txt";
+    private static final long SAVE_DELAY = 5 * (60 * 20); // 5 minutes
+    private static final long SAVE_PERIOD = 5 * (60 * 20); // 5 minutes
 
+    private Map<String, StreakRecord> streaks;
     private File streakLogFile;
 
-    public DTPStreakLog()
+    public DTPStreakLog(DeathTpPlus plugin)
     {
+        streaks = new Hashtable<String, StreakRecord>();
         streakLogFile = new File(DeathTpPlus.dataFolder, STREAK_LOG_FILE);
         if (!streakLogFile.exists()) {
             try {
@@ -37,33 +41,51 @@ public class DTPStreakLog
                 DeathTpPlus.logger.severe("Failed to create streak log: " + e.toString());
             }
         }
+        load();
+
+        Bukkit.getScheduler().scheduleAsyncRepeatingTask(plugin, this, SAVE_DELAY, SAVE_PERIOD);
     }
 
-    public StreakRecord getRecord(String playerName)
+    private void load()
     {
-        StreakRecord streak = null;
-
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(streakLogFile));
-
             String line = null;
+
             while ((line = bufferedReader.readLine()) != null) {
-                streak = new StreakRecord(line);
-                if (playerName.equalsIgnoreCase(streak.getPlayerName())) {
-                    return streak;
-                }
-                else {
-                    streak = null;
-                }
+                StreakRecord streak = new StreakRecord(line);
+                streaks.put(streak.getPlayerName(), streak);
             }
 
             bufferedReader.close();
+            DeathTpPlus.logger.info("DEBUG: streak log loaded");
         }
         catch (IOException e) {
             DeathTpPlus.logger.severe("Failed to read streak log: " + e.toString());
         }
+    }
 
-        return streak;
+    private void save()
+    {
+        try {
+            BufferedWriter streakLogWriter = new BufferedWriter(new FileWriter(streakLogFile));
+
+            for (StreakRecord streak : streaks.values()) {
+                streakLogWriter.write(streak.toString());
+                streakLogWriter.newLine();
+            }
+
+            streakLogWriter.close();
+            DeathTpPlus.logger.info("DEBUG: streak log saved");
+        }
+        catch (IOException e) {
+            DeathTpPlus.logger.severe("Failed to write streak log: " + e.toString());
+        }
+    }
+
+    public StreakRecord getRecord(String playerName)
+    {
+        return streaks.get(playerName);
     }
 
     public void setRecord(DeathDetail deathDetail)
@@ -81,44 +103,25 @@ public class DTPStreakLog
             return;
         }
 
-        List<StreakRecord> streakList = new ArrayList<StreakRecord>();
-
-        StreakRecord killStreakRecord = null;
-        StreakRecord deathStreakRecord = null;
-
-        // read the file
-        try {
-            BufferedReader streakLogReader = new BufferedReader(new FileReader(streakLogFile));
-
-            String line = null;
-            while ((line = streakLogReader.readLine()) != null) {
-                StreakRecord streak = new StreakRecord(line);
-                if (victimName.equalsIgnoreCase(streak.getPlayerName())) {
-                    streak.setCount(streak.getCount() > 0 ? -1 : streak.getCount() - 1);
-                    deathStreakRecord = streak;
-                }
-                if (killerName.equalsIgnoreCase(streak.getPlayerName())) {
-                    streak.setCount(streak.getCount() < 0 ? 1 : streak.getCount() + 1);
-                    streak.updateMultiKillCount(Long.valueOf(DTPConfig.configValues.get(ConfigValueType.MULTIKILL_TIMEWINDOW)));
-                    killStreakRecord = streak;
-                }
-                streakList.add(streak);
-            }
-
-            streakLogReader.close();
+        StreakRecord killStreakRecord;
+        if (streaks.containsKey(killerName)) {
+            killStreakRecord = streaks.get(killerName);
+            killStreakRecord.incrementKillCount();
+            killStreakRecord.updateMultiKillCount(Long.valueOf(DTPConfig.configValues.get(ConfigValueType.MULTIKILL_TIMEWINDOW)));
         }
-        catch (IOException e) {
-            DeathTpPlus.logger.severe("Failed to read streak log: " + e.toString());
-        }
-
-        if (killStreakRecord == null) {
+        else {
             killStreakRecord = new StreakRecord(killerName, 1, new Date(), 1);
-            streakList.add(killStreakRecord);
+            streaks.put(killerName, killStreakRecord);
         }
 
-        if (deathStreakRecord == null) {
+        StreakRecord deathStreakRecord;
+        if (streaks.containsKey(victimName)) {
+            deathStreakRecord = streaks.get(victimName);
+            deathStreakRecord.incrementDeathCount();
+        }
+        else {
             deathStreakRecord = new StreakRecord(victimName, -1, new Date(0L), 0);
-            streakList.add(deathStreakRecord);
+            streaks.put(victimName, deathStreakRecord);
         }
 
         // Check to see if we should announce a streak
@@ -139,20 +142,11 @@ public class DTPStreakLog
                 Bukkit.getPluginManager().callEvent(new KillStreakEvent(deathDetail.getKiller(), deathDetail.getPlayer(), killStreakMessage, killStreakRecord.getCount(), false));
             }
         }
+    }
 
-        // Write streaks to file
-        try {
-            BufferedWriter streakLogWriter = new BufferedWriter(new FileWriter(streakLogFile));
-
-            for (StreakRecord streak : streakList) {
-                streakLogWriter.write(streak.toString());
-                streakLogWriter.newLine();
-            }
-
-            streakLogWriter.close();
-        }
-        catch (IOException e) {
-            DeathTpPlus.logger.severe("Failed to write streak log: " + e.toString());
-        }
+    @Override
+    public void run()
+    {
+        save();
     }
 }

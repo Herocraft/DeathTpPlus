@@ -28,7 +28,7 @@ public class DeathsCommand extends BasicCommand
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
                     total = DeathTpPlus.deathLog.getTotalByType(player.getName(), DeathRecordType.death);
-                    if (total > -1) {
+                    if (total >= 0) {
                         sender.sendMessage(String.format("You died %d time(s)", total));
                     }
                     else {
@@ -41,7 +41,7 @@ public class DeathsCommand extends BasicCommand
                 break;
             case 1:
                 total = DeathTpPlus.deathLog.getTotalByType(args[0], DeathRecordType.death);
-                if (total > -1) {
+                if (total >= 0) {
                     sender.sendMessage(String.format("%s died %d time(s)", args[0], total));
                 }
                 else {

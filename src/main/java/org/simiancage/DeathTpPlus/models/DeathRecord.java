@@ -77,9 +77,18 @@ public class DeathRecord
         this.count = count;
     }
 
-    @Override
-    public String toString()
+    public void incrementCount() {
+    	count++;
+	}
+
+	public String getKey()
     {
-        return String.format("%s:%s:%s:%d", playerName, type, eventName, count);
+    	return String.format("%s:%s:%s", playerName, type, eventName);
     }
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s:%s:%s:%d", playerName, type, eventName, count);
+	}
 }
