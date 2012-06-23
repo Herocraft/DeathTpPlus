@@ -58,7 +58,6 @@ public class DTPStreakLog implements Runnable
             }
 
             bufferedReader.close();
-            DeathTpPlus.logger.info("DEBUG: streak log loaded");
         }
         catch (IOException e) {
             DeathTpPlus.logger.severe("Failed to read streak log: " + e.toString());
@@ -76,7 +75,6 @@ public class DTPStreakLog implements Runnable
             }
 
             streakLogWriter.close();
-            DeathTpPlus.logger.info("DEBUG: streak log saved");
         }
         catch (IOException e) {
             DeathTpPlus.logger.severe("Failed to write streak log: " + e.toString());

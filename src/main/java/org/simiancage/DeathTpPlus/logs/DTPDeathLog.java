@@ -57,7 +57,6 @@ public class DTPDeathLog implements Runnable
             }
 
             deathLogReader.close();
-            DeathTpPlus.logger.info("DEBUG: death log loaded");
         }
         catch (IOException e) {
             DeathTpPlus.logger.severe("Failed to edit death log: " + e.toString());
@@ -78,7 +77,6 @@ public class DTPDeathLog implements Runnable
 
             tmpDeathLogWriter.close();
             tmpDeathLogFile.renameTo(deathLogFile);
-            DeathTpPlus.logger.info("DEBUG: death log saved");
         }
         catch (IOException e) {
             DeathTpPlus.logger.severe("Failed to edit death log: " + e.toString());

@@ -52,7 +52,6 @@ public class DTPDeathLocationLog implements Runnable
             }
 
             bufferedReader.close();
-            DeathTpPlus.logger.info("DEBUG: death location log loaded");
         }
         catch (IOException e) {
             DeathTpPlus.logger.severe("Failed to read death location log: " + e.toString());
@@ -70,7 +69,6 @@ public class DTPDeathLocationLog implements Runnable
             }
 
             deathLocationLogWriter.close();
-            DeathTpPlus.logger.info("DEBUG: death location log saved");
         }
         catch (IOException e) {
             DeathTpPlus.logger.severe("Failed to write death location log: " + e.toString());
