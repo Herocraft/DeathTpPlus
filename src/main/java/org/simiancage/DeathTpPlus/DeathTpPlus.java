@@ -103,6 +103,10 @@ public class DeathTpPlus extends JavaPlugin
 
     public void onDisable()
     {
+        deathLocationLog.save();
+        deathLog.save();
+        streakLog.save();
+
         logger.info("Disabled");
     }
 

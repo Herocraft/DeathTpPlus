@@ -22,8 +22,8 @@ public class DTPDeathLog implements Runnable
 {
     private static final String DEATH_LOG_FILE = "deathlog.txt";
     private static final String DEATH_LOG_TMP = "deathlog.tmp";
-    private static final long SAVE_DELAY = 5 * (60 * 20); // 5 minutes
-    private static final long SAVE_PERIOD = 5 * (60 * 20); // 5 minutes
+    private static final long SAVE_DELAY = 1 * (60 * 20); // 1 minutes
+    private static final long SAVE_PERIOD = 3 * (60 * 20); // 3 minutes
 
     private Map<String, DeathRecord> deaths;
     private File deathLogFile;
@@ -63,7 +63,7 @@ public class DTPDeathLog implements Runnable
         }
     }
 
-    private void save()
+    public synchronized void save()
     {
         File tmpDeathLogFile = new File(DeathTpPlus.dataFolder, DEATH_LOG_TMP);
 

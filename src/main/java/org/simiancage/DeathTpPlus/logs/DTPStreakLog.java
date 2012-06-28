@@ -23,8 +23,8 @@ import org.simiancage.DeathTpPlus.utils.DTPConfig.DeathEventType;
 public class DTPStreakLog implements Runnable
 {
     private static final String STREAK_LOG_FILE = "streak.txt";
-    private static final long SAVE_DELAY = 5 * (60 * 20); // 5 minutes
-    private static final long SAVE_PERIOD = 5 * (60 * 20); // 5 minutes
+    private static final long SAVE_DELAY = 3 * (60 * 20); // 3 minutes
+    private static final long SAVE_PERIOD = 3 * (60 * 20); // 3 minutes
 
     private Map<String, StreakRecord> streaks;
     private File streakLogFile;
@@ -64,7 +64,7 @@ public class DTPStreakLog implements Runnable
         }
     }
 
-    private void save()
+    public synchronized void save()
     {
         try {
             BufferedWriter streakLogWriter = new BufferedWriter(new FileWriter(streakLogFile));

@@ -17,8 +17,8 @@ import org.simiancage.DeathTpPlus.models.DeathLocationRecord;
 public class DTPDeathLocationLog implements Runnable
 {
     private static final String LOCATION_LOG_FILE = "locs.txt";
-    private static final long SAVE_DELAY = 5 * (60 * 20); // 5 minutes
-    private static final long SAVE_PERIOD = 5 * (60 * 20); // 5 minutes
+    private static final long SAVE_DELAY = 2 * (60 * 20); // 2 minutes
+    private static final long SAVE_PERIOD = 3 * (60 * 20); // 3 minutes
 
     private Map<String, DeathLocationRecord> deathLocations;
     private File deathLocationLogFile;
@@ -58,7 +58,7 @@ public class DTPDeathLocationLog implements Runnable
         }
     }
 
-    private void save()
+    public synchronized void save()
     {
         try {
             BufferedWriter deathLocationLogWriter = new BufferedWriter(new FileWriter(deathLocationLogFile));
