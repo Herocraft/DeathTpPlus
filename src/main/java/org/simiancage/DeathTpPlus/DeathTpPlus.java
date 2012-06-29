@@ -37,7 +37,7 @@ public class DeathTpPlus extends JavaPlugin
     public static final File dataFolder = new File("plugins" + File.separator + "DeathTpPlus");
 
     // plugin variables
-    public static DTPLogger logger = new DTPLogger();
+    public static final DTPLogger logger = new DTPLogger();
     public static DTPConfig config;
     public static DTPDeathLocationLog deathLocationLog;
     public static DTPDeathLog deathLog;

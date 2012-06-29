@@ -34,8 +34,8 @@ public class DTPConfig
     private static List<String> killStreakSounds;
     private static List<String> multiKillSounds;
 
-    public static HashMap<ConfigValueType, String> configValues = new HashMap<ConfigValueType, String>();
-    public static HashMap<ConfigFlagType, Boolean> configFlags = new HashMap<ConfigFlagType, Boolean>();
+    public static final HashMap<ConfigValueType, String> configValues = new HashMap<ConfigValueType, String>();
+    public static final HashMap<ConfigFlagType, Boolean> configFlags = new HashMap<ConfigFlagType, Boolean>();
     public static boolean worldTravel = false;
 
     private static final String CONFIG_FILE = "config.yml";

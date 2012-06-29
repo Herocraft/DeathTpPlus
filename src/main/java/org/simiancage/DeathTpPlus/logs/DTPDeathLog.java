@@ -3,9 +3,11 @@ package org.simiancage.DeathTpPlus.logs;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
@@ -22,6 +24,7 @@ public class DTPDeathLog implements Runnable
 {
     private static final String DEATH_LOG_FILE = "deathlog.txt";
     private static final String DEATH_LOG_TMP = "deathlog.tmp";
+    private static final String CHARSET = "UTF-8";
     private static final long SAVE_DELAY = 1 * (60 * 20); // 1 minutes
     private static final long SAVE_PERIOD = 3 * (60 * 20); // 3 minutes
 
@@ -48,7 +51,7 @@ public class DTPDeathLog implements Runnable
     private void load()
     {
         try {
-            BufferedReader deathLogReader = new BufferedReader(new FileReader(deathLogFile));
+            BufferedReader deathLogReader = new BufferedReader(new InputStreamReader(new FileInputStream(deathLogFile), CHARSET));
 
             String line = null;
             while ((line = deathLogReader.readLine()) != null) {
@@ -68,7 +71,7 @@ public class DTPDeathLog implements Runnable
         File tmpDeathLogFile = new File(DeathTpPlus.dataFolder, DEATH_LOG_TMP);
 
         try {
-            BufferedWriter tmpDeathLogWriter = new BufferedWriter(new FileWriter(tmpDeathLogFile));
+            BufferedWriter tmpDeathLogWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tmpDeathLogFile), CHARSET));
 
             for (DeathRecord deathRecord : deaths.values()) {
                 tmpDeathLogWriter.write(deathRecord.toString());

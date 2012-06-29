@@ -3,9 +3,11 @@ package org.simiancage.DeathTpPlus.logs;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
@@ -23,6 +25,7 @@ import org.simiancage.DeathTpPlus.utils.DTPConfig.DeathEventType;
 public class DTPStreakLog implements Runnable
 {
     private static final String STREAK_LOG_FILE = "streak.txt";
+    private static final String CHARSET = "UTF-8";
     private static final long SAVE_DELAY = 3 * (60 * 20); // 3 minutes
     private static final long SAVE_PERIOD = 3 * (60 * 20); // 3 minutes
 
@@ -49,7 +52,7 @@ public class DTPStreakLog implements Runnable
     private void load()
     {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(streakLogFile));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(streakLogFile), CHARSET));
             String line = null;
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -67,7 +70,7 @@ public class DTPStreakLog implements Runnable
     public synchronized void save()
     {
         try {
-            BufferedWriter streakLogWriter = new BufferedWriter(new FileWriter(streakLogFile));
+            BufferedWriter streakLogWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(streakLogFile), CHARSET));
 
             for (StreakRecord streak : streaks.values()) {
                 streakLogWriter.write(streak.toString());

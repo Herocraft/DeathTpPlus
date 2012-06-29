@@ -3,9 +3,11 @@ package org.simiancage.DeathTpPlus.logs;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -17,6 +19,7 @@ import org.simiancage.DeathTpPlus.models.DeathLocationRecord;
 public class DTPDeathLocationLog implements Runnable
 {
     private static final String LOCATION_LOG_FILE = "locs.txt";
+    private static final String CHARSET = "UTF-8";
     private static final long SAVE_DELAY = 2 * (60 * 20); // 2 minutes
     private static final long SAVE_PERIOD = 3 * (60 * 20); // 3 minutes
 
@@ -43,7 +46,7 @@ public class DTPDeathLocationLog implements Runnable
     private void load()
     {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(deathLocationLogFile));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(deathLocationLogFile), CHARSET));
             String line = null;
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -61,7 +64,7 @@ public class DTPDeathLocationLog implements Runnable
     public synchronized void save()
     {
         try {
-            BufferedWriter deathLocationLogWriter = new BufferedWriter(new FileWriter(deathLocationLogFile));
+            BufferedWriter deathLocationLogWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(deathLocationLogFile), CHARSET));
 
             for (DeathLocationRecord deathLocation : deathLocations.values()) {
                 deathLocationLogWriter.write(deathLocation.toString());
