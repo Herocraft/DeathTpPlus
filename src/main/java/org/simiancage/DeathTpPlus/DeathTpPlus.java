@@ -34,7 +34,7 @@ import com.ensifera.animosity.craftirc.CraftIRC;
 
 public class DeathTpPlus extends JavaPlugin
 {
-    public static final File dataFolder = new File("plugins" + File.separator + "DeathTpPlus");
+    public static final File DATA_FOLDER = new File("plugins" + File.separator + "DeathTpPlus");
 
     // plugin variables
     public static final DTPLogger logger = new DTPLogger();
@@ -72,13 +72,13 @@ public class DeathTpPlus extends JavaPlugin
 
         // hook CraftIRC
         Plugin plugin = this.getServer().getPluginManager().getPlugin("CraftIRC");
-        if (plugin != null && plugin instanceof CraftIRC) {
+        if (plugin instanceof CraftIRC) {
             craftIRCPlugin = (CraftIRC) plugin;
             logger.info("CraftIRC support enabled");
         }
 
         Plugin sPlugin = this.getServer().getPluginManager().getPlugin("Spout");
-        if (sPlugin != null && sPlugin instanceof Spout) {
+        if (sPlugin instanceof Spout) {
             spout = (Spout) sPlugin;
             logger.info("Spout support enabled");
         }

@@ -3,7 +3,6 @@ package org.simiancage.DeathTpPlus.commands;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Hashtable;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -37,7 +36,7 @@ public class TopCommand extends BasicCommand
             }
         }
 
-        Hashtable<String, Integer> totals = null;
+        Map<String, Integer> totals = null;
         if (args[0].equalsIgnoreCase("kills")) {
             totals = DeathTpPlus.deathLog.getTotalsByType(DeathRecordType.kill);
         }

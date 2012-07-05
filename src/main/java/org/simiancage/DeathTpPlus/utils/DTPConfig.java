@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -27,15 +28,15 @@ public class DTPConfig
         SHOW_DEATHNOTIFY, ALLOW_DEATHTP, SHOW_STREAKS, SHOW_SIGN, ALLOW_DEATHLOG, PLAY_SOUNDS, VERBOSE
     }
 
-    private static HashMap<DeathEventType, List<String>> deathMessages = new HashMap<DeathEventType, List<String>>();
+    private static Map<DeathEventType, List<String>> deathMessages = new HashMap<DeathEventType, List<String>>();
     private static List<String> deathStreakMessages;
     private static List<String> killStreakMessages;
     private static List<String> multiKillMessages;
     private static List<String> killStreakSounds;
     private static List<String> multiKillSounds;
 
-    public static final HashMap<ConfigValueType, String> configValues = new HashMap<ConfigValueType, String>();
-    public static final HashMap<ConfigFlagType, Boolean> configFlags = new HashMap<ConfigFlagType, Boolean>();
+    public static final Map<ConfigValueType, String> configValues = new HashMap<ConfigValueType, String>();
+    public static final Map<ConfigFlagType, Boolean> configFlags = new HashMap<ConfigFlagType, Boolean>();
     public static boolean worldTravel = false;
 
     private static final String CONFIG_FILE = "config.yml";
@@ -52,7 +53,7 @@ public class DTPConfig
     {
         this.plugin = plugin;
 
-        configFile = new File(DeathTpPlus.dataFolder, CONFIG_FILE);
+        configFile = new File(DeathTpPlus.DATA_FOLDER, CONFIG_FILE);
         configuration = getConfig(configFile);
 
         // Configuration nodes
@@ -61,7 +62,7 @@ public class DTPConfig
         }
 
         for (ConfigFlagType configNode : ConfigFlagType.values()) {
-            configFlags.put(configNode, new Boolean(configuration.getString(configNode.toString().toLowerCase().replace("_", "-"), "")));
+            configFlags.put(configNode, Boolean.valueOf(configuration.getString(configNode.toString().toLowerCase().replace("_", "-"), "")));
         }
 
         // Death Event nodes

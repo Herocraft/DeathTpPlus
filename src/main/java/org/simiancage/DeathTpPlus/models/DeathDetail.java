@@ -145,21 +145,23 @@ public class DeathDetail
     private static String toCamelCase(String rawItemName)
     {
         String[] rawItemNameParts = rawItemName.split("_");
-        String itemName = "";
+        StringBuffer sb = new StringBuffer();
 
         for (String itemNamePart : rawItemNameParts) {
-            itemName = itemName + " " + toProperCase(itemNamePart);
+            sb.append(" ").append(toProperCase(itemNamePart));
         }
 
-        if (itemName.trim().equals("Air")) {
+        String itemName = sb.toString().trim();
+
+        if (itemName.equals("Air")) {
             itemName = "Fists";
         }
 
-        if (itemName.trim().equals("Bow")) {
+        if (itemName.equals("Bow")) {
             itemName = "Bow & Arrow";
         }
 
-        return itemName.trim();
+        return itemName;
     }
 
     private static String toProperCase(String str)

@@ -29,7 +29,7 @@ public class DTPDeathLocationLog implements Runnable
     public DTPDeathLocationLog(DeathTpPlus plugin)
     {
         deathLocations = new Hashtable<String, DeathLocationRecord>();
-        deathLocationLogFile = new File(DeathTpPlus.dataFolder, LOCATION_LOG_FILE);
+        deathLocationLogFile = new File(DeathTpPlus.DATA_FOLDER, LOCATION_LOG_FILE);
         if (!deathLocationLogFile.exists()) {
             try {
                 deathLocationLogFile.createNewFile();

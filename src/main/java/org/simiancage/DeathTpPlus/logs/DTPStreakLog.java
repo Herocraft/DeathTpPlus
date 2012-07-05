@@ -35,7 +35,7 @@ public class DTPStreakLog implements Runnable
     public DTPStreakLog(DeathTpPlus plugin)
     {
         streaks = new Hashtable<String, StreakRecord>();
-        streakLogFile = new File(DeathTpPlus.dataFolder, STREAK_LOG_FILE);
+        streakLogFile = new File(DeathTpPlus.DATA_FOLDER, STREAK_LOG_FILE);
         if (!streakLogFile.exists()) {
             try {
                 streakLogFile.createNewFile();

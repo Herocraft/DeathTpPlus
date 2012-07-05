@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -19,7 +20,7 @@ import org.simiancage.DeathTpPlus.DeathTpPlus;
 
 public class CommandHandler {
 
-    protected LinkedHashMap<String, Command> commands;
+    protected Map<String, Command> commands;
 
     public CommandHandler() {
         commands = new LinkedHashMap<String, Command>();
@@ -51,12 +52,12 @@ public class CommandHandler {
         }
         
         for (int argsIncluded = arguments.length; argsIncluded >= 0; argsIncluded--) {
-        	String identifier = "";
+        	StringBuffer sb = new StringBuffer();
             for (int i = 0; i < argsIncluded; i++) {
-                identifier += " " + arguments[i];
+                sb.append(" ").append(arguments[i]);
             }
             
-            identifier = identifier.trim();            
+            String identifier = sb.toString().trim();            
             for (Command cmd : commands.values()) {
                 if (cmd.isIdentifier(sender, identifier)) {
                     String[] realArgs = Arrays.copyOfRange(arguments, argsIncluded, arguments.length);
