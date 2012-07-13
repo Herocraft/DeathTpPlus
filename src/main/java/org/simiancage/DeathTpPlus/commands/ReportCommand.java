@@ -17,7 +17,7 @@ public class ReportCommand extends BasicCommand
     public ReportCommand(DeathTpPlus plugin)
     {
         super("Report");
-        setDescription("Display player kill/death report");
+        setDescription("Display your kill/death report");
         setUsage("/dtp report §9<kills|deaths> §8[page#]");
         setArgumentRange(1, 2);
         setIdentifiers("report");

@@ -95,10 +95,10 @@ public class DTPDeathLog implements Runnable
         for (DeathRecord record : getRecords()) {
             if (record.getType() == type) {
                 if (totals.containsKey(record.getPlayerName())) {
-                    totals.put(record.getPlayerName(), totals.get(record.getPlayerName()) + 1);
+                    totals.put(record.getPlayerName(), totals.get(record.getPlayerName()) + record.getCount());
                 }
                 else {
-                    totals.put(record.getPlayerName(), Integer.valueOf(1));
+                    totals.put(record.getPlayerName(), record.getCount());
                 }
             }
         }

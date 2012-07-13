@@ -17,7 +17,7 @@ public class TopCommand extends BasicCommand
     public TopCommand(DeathTpPlus plugin)
     {
         super("Top");
-        setDescription("Display player kill/death report");
+        setDescription("Display top kill/death report");
         setUsage("/dtp top §9<kills|deaths> §8[page#]");
         setArgumentRange(1, 2);
         setIdentifiers("top");
