@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.getspout.spout.Spout;
+import org.getspout.spoutapi.Spout;
 import org.simiancage.DeathTpPlus.commands.CommandHandler;
 import org.simiancage.DeathTpPlus.commands.DeathTpCommand;
 import org.simiancage.DeathTpPlus.commands.DeathsCommand;

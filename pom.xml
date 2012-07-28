@@ -1,6 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.simiancage.deathtpplus</groupId>
+  <artifactId>HeroicDeath2</artifactId>
   <version>1.95-SNAPSHOT</version>
   <repositories>
     <repository>
@@ -24,7 +25,7 @@
     </dependency>
     <dependency>
       <groupId>org.getspout</groupId>
-      <artifactId>spoutplugin</artifactId>
+      <artifactId>spoutpluginapi</artifactId>
       <version>dev-SNAPSHOT</version>
     </dependency>
     <dependency>
@@ -69,10 +70,14 @@
   	<system>jenkins</system>
   	<url>http://ci.herocraftonline.com/job/HeroicDeath2/</url>
   </ciManagement>
-  <url>https://github.com/Herocraft/DeathTpPlus</url>
-  <artifactId>HeroicDeath2</artifactId>
+  <scm>
+  	<url>https://github.com/Herocraft/DeathTpPlus</url>
+  	<connection>scm:git:git://github.com:Herocraft/DeathTpPlus.git</connection>
+  	<developerConnection>scm:git:git://github.com:Herocraft/DeathTpPlus.git</developerConnection>
+  </scm>
   <issueManagement>
   	<system>GitHub</system>
   	<url>https://github.com/HeroCraft/DeathTpPlus/issues</url>
   </issueManagement>
+  <url>https://github.com/Herocraft/DeathTpPlus</url>
 </project>

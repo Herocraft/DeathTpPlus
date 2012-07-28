@@ -5,7 +5,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class DeathStreakEvent extends Event {
-    private static final HandlerList HANDLERS = new HandlerList();
+    private static final HandlerList handlers = new HandlerList();
     private Player player;
     private Player killer;
     private String message;
@@ -51,10 +51,10 @@ public class DeathStreakEvent extends Event {
     }
 
     public HandlerList getHandlers() {
-        return HANDLERS;
+        return handlers;
     }
 
     public static HandlerList getHandlerList() {
-        return HANDLERS;
+        return handlers;
     }
 }
