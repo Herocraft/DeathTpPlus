@@ -13,7 +13,6 @@ import org.simiancage.DeathTpPlus.DeathTpPlus;
 import org.simiancage.DeathTpPlus.models.DeathDetail;
 import org.simiancage.DeathTpPlus.utils.DTPConfig;
 import org.simiancage.DeathTpPlus.utils.DTPConfig.ConfigFlagType;
-import org.simiancage.DeathTpPlus.utils.DTPConfig.ConfigValueType;
 import org.simiancage.DeathTpPlus.utils.DTPUtils;
 
 public class DTPEntityListener implements Listener {
@@ -47,8 +46,8 @@ public class DTPEntityListener implements Listener {
             }
 
             // CraftIRC
-            if (DeathTpPlus.craftIRCPlugin != null) {
-                DeathTpPlus.craftIRCPlugin.sendMessageToTag(DTPUtils.removeColorCodes(deathMessage), DTPConfig.configValues.get(ConfigValueType.DEATHTP_TAG));
+            if (DeathTpPlus.craftIRCEndPoint != null) {
+                DeathTpPlus.craftIRCEndPoint.sendMessage(DTPUtils.removeColorCodes(deathMessage));
             }
         }
 
