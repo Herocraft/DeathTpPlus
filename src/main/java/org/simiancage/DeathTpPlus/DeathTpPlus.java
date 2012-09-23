@@ -18,6 +18,7 @@ import org.simiancage.DeathTpPlus.commands.DeathTpCommand;
 import org.simiancage.DeathTpPlus.commands.DeathsCommand;
 import org.simiancage.DeathTpPlus.commands.HelpCommand;
 import org.simiancage.DeathTpPlus.commands.KillsCommand;
+import org.simiancage.DeathTpPlus.commands.MessageCommand;
 import org.simiancage.DeathTpPlus.commands.ReportCommand;
 import org.simiancage.DeathTpPlus.commands.StreakCommand;
 import org.simiancage.DeathTpPlus.commands.TopCommand;
@@ -100,6 +101,7 @@ public class DeathTpPlus extends JavaPlugin
         commandHandler.addCommand(new ReportCommand(this));
         commandHandler.addCommand(new TopCommand(this));
         commandHandler.addCommand(new DeathTpCommand(this));
+        commandHandler.addCommand(new MessageCommand(this));
     }
 
     public void onDisable()
