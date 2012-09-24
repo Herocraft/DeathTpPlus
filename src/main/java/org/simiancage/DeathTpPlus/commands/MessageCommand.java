@@ -2,8 +2,7 @@ package org.simiancage.DeathTpPlus.commands;
 
 import org.bukkit.command.CommandSender;
 import org.simiancage.DeathTpPlus.DeathTpPlus;
-import org.simiancage.DeathTpPlus.utils.DTPConfig;
-import org.simiancage.DeathTpPlus.utils.DTPConfig.ConfigFlagType;
+import org.simiancage.DeathTpPlus.listeners.DTPEntityListener;
 
 public class MessageCommand extends BasicCommand
 {
@@ -21,10 +20,10 @@ public class MessageCommand extends BasicCommand
     public boolean execute(CommandSender sender, String identifier, String[] args)
     {
         if (args[0].equalsIgnoreCase("on")) {
-            DTPConfig.configFlags.put(ConfigFlagType.SHOW_DEATHNOTIFY, true);
+            DTPEntityListener.showDeathMessage = true;
         }
         else if (args[0].equalsIgnoreCase("off")) {
-            DTPConfig.configFlags.put(ConfigFlagType.SHOW_DEATHNOTIFY, false);
+            DTPEntityListener.showDeathMessage = false;
         }
 
         return true;

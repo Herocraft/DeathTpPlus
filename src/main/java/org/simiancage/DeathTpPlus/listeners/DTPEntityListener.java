@@ -17,6 +17,8 @@ import org.simiancage.DeathTpPlus.utils.DTPUtils;
 
 public class DTPEntityListener implements Listener {
 
+    public static boolean showDeathMessage = true;
+
     @EventHandler(priority = EventPriority.NORMAL)
     public void onEntityDeath(EntityDeathEvent event) {
         if (!(event.getEntity() instanceof Player)) {
@@ -42,7 +44,12 @@ public class DTPEntityListener implements Listener {
             String deathMessage = DTPConfig.getDeathMessage(deathDetail);
 
             if (event instanceof PlayerDeathEvent) {
-                ((PlayerDeathEvent) event).setDeathMessage(deathMessage);
+                if (showDeathMessage) {
+                    ((PlayerDeathEvent) event).setDeathMessage(deathMessage);
+                }
+                else {
+                    ((PlayerDeathEvent) event).setDeathMessage("");
+                }
             }
 
             // CraftIRC
