@@ -138,6 +138,11 @@ skeleton:
 - '&5%n&7! strafe the arrows! Strafe the arrows!'
 - '&7A skeleton just got a head shot on &5%n&7!'
 
+wither-skeleton:
+- '&5%n&7 got killed by a black Skeleton!'
+- '&5%n&7 should take more fencing lessons.'
+- '&5%n&7 was hit by a stone butter slicer.'
+
 spider:
 - '&5%n&7 is all webbed up.'
 - '&5%n&7 got trampled by arachnids!'
@@ -151,6 +156,13 @@ zombie:
 - '&5%n&7 fell to the hunger of the horde!'
 - '&5%n&7 Hasn''t played enough L4D2!'
 - '&5%n&7 couldn''t run faster than the zombie!'
+
+zombie-villager:
+- '&5%n&7 was punched to death by villager zombies!'
+- '&5%n&7 was bitten by a villager zombie!'
+- '&5%n&7 fell to the hunger of the villager horde!'
+- '&5%n&7 Hasn''t played enough L4D2!'
+- '&5%n&7 couldn''t run faster than the villager zombie!'
 
 pvp:
 - '&f%a&7 killed &5%n&7 using a(n) &3%i&7!'
@@ -306,6 +318,18 @@ magic:
 
 iron-golem:
 - '&5%n&7 messed with the wrong giant!'
+
+witch:
+- '&5%n&7 got bewitched!'
+- 'Never mess with the pointy hat, &5%n&7'
+- '&5%n&7, that wasn''t a swamp monster.'
+- '&5%n&7 thought is was a good idea to make comments about good looks.'
+
+wither:
+- '&5%n&7 got killed by poisoned projectile!'
+- 'A thing born from sand killed &5%n&7'
+- '&5%n&7 shouldn''t have called the wind.'
+- '&5%n&7 was withered.'
 
 # ----- Streaks
 
